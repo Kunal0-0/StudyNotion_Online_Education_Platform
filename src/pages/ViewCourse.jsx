@@ -27,7 +27,7 @@ export default function ViewCourse() {
       dispatch(setCompletedLectures(courseData.completedVideos))
       let lectures = 0
       courseData?.courseDetails?.courseContent?.forEach((sec) => {
-        lectures += sec.subSection.length
+        lectures += sec.subSection?.length
       })
       dispatch(setTotalNoOfLectures(lectures))
     })()

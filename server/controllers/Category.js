@@ -65,7 +65,7 @@ exports.categoryPageDetails = async (req, res) => {
         .json({ success: false, message: "Category not found" })
     }
     // Handle the case when there are no courses
-    if (selectedCategory.courses.length === 0) {
+    if (selectedCategory.courses?.length === 0) {
       console.log("No courses found for the selected category.")
       return res.status(404).json({
         success: false,
@@ -78,7 +78,7 @@ exports.categoryPageDetails = async (req, res) => {
       _id: { $ne: categoryId },
     })
     let differentCategory = await Category.findOne(
-      categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
+      categoriesExceptSelected[getRandomInt(categoriesExceptSelected?.length)]
         ._id
     )
       .populate({

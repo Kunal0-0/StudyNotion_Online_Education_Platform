@@ -47,7 +47,7 @@ export default function RenderSteps() {
               </button>
               
             </div>
-            {item.id !== steps.length && (
+            {item.id !== steps?.length && (
               <>
                 <div
                   className={`h-[calc(34px/2)] w-[33%]  border-dashed border-b-2 ${

@@ -39,10 +39,10 @@ exports.createCourse = async (req, res) => {
       !courseDescription ||
       !whatYouWillLearn ||
       !price ||
-      !tag.length ||
+      !tag?.length ||
       !thumbnail ||
       !category ||
-      !instructions.length
+      !instructions?.length
     ) {
       return res.status(400).json({
         success: false,

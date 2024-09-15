@@ -161,10 +161,10 @@ exports.getEnrolledCourses = async (req, res) => {
       .exec()
     userDetails = userDetails.toObject()
     var SubsectionLength = 0
-    for (var i = 0; i < userDetails.courses.length; i++) {
+    for (var i = 0; i < userDetails.courses?.length; i++) {
       let totalDurationInSeconds = 0
       SubsectionLength = 0
-      for (var j = 0; j < userDetails.courses[i].courseContent.length; j++) {
+      for (var j = 0; j < userDetails.courses[i].courseContent?.length; j++) {
         totalDurationInSeconds += userDetails.courses[i].courseContent[
           j
         ].subSection.reduce((acc, curr) => acc + parseInt(curr.timeDuration), 0)
@@ -172,13 +172,13 @@ exports.getEnrolledCourses = async (req, res) => {
           totalDurationInSeconds
         )
         SubsectionLength +=
-          userDetails.courses[i].courseContent[j].subSection.length
+          userDetails.courses[i].courseContent[j].subSection?.length
       }
       let courseProgressCount = await CourseProgress.findOne({
         courseID: userDetails.courses[i]._id,
         userId: userId,
       })
-      courseProgressCount = courseProgressCount?.completedVideos.length
+      courseProgressCount = courseProgressCount?.completedVideos?.length
       if (SubsectionLength === 0) {
         userDetails.courses[i].progressPercentage = 100
       } else {
@@ -214,7 +214,7 @@ exports.instructorDashboard = async (req, res) => {
     const courseDetails = await Course.find({ instructor: req.user.id })
 
     const courseData = courseDetails.map((course) => {
-      const totalStudentsEnrolled = course.studentsEnroled.length
+      const totalStudentsEnrolled = course.studentsEnroled?.length
       const totalAmountGenerated = totalStudentsEnrolled * course.price
 
       // Create a new object with the additional fields
